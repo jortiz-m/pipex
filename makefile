@@ -6,11 +6,11 @@
 #    By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 12:55:25 by jortiz-m          #+#    #+#              #
-#    Updated: 2024/10/08 12:05:02 by jortiz-m         ###   ########.fr        #
+#    Updated: 2024/10/08 12:11:51 by jortiz-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= pipex
+NAME	= pipex.h
 CC		= gcc
 CFLAGS	= -Wall -Wextra -g
 RM		= rm -rf
@@ -20,7 +20,7 @@ LIBFT_FILE		= $(LIBFT_DIR)/libft.a
 
 MAKE_LIB		= make --no-print-directory -C
 
-PIPEX_SRC	=  pipex.c check_cmd.c 
+PIPEX_SRC	=  pipex.c check_cmd.c check_fd.c exe.c matrix_utils.c pipex_utils.c process.c
 
 PIPEX_OBJ = $(addprefix obj/, $(PIPEX_SRC:.c=.o))
 

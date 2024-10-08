@@ -6,13 +6,14 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:55:32 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/08 12:04:15 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:15:24 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include "lib/libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
@@ -20,7 +21,6 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <fcntl.h>
-# include "lib/libft/libft.h"
 
 # ifndef LINUX_PATH
 #  define LINUX_PATH "/home/jortiz-m/.pyenv/shims:/home/jortiz-m/.pyenv/bin:\
