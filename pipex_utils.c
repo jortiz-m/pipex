@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/08 12:06:59 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:32:59 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	validate_arguments(int ac, char **av)
 {
 	if (ac == 4)
 	{
-		if (!fd_validation(av[0], av[3]) || !cmd_validation(av[1], av[2]))
+		if (!fd_validation(av[0]) || !cmd_validation(av[1], av[2]))
 		{
 			perror("fd_or_cmd: No valid arguments");
 			exit(EXIT_FAILURE);
@@ -24,12 +24,11 @@ void	validate_arguments(int ac, char **av)
 	}
 	else
 	{
-		perror("Write 4 arguments!\n");
+		ft_putstr_fd("write in this format: ./pipex infile cmd1 cmd2 outfile\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
 
-/* Devuelve un str de la ruta exacta del comando */
 char	*get_path(char **cmd_paths)
 {
 	char	*cmd_dir;
@@ -55,7 +54,7 @@ int	open_file(char *file, enum e_mode mode)
 	if (mode == READ)
 		fd = open(file, O_RDONLY);
 	else
-		fd = open(file, O_WRONLY | O_TRUNC, 0644); // No estoy seguro si debe tener estos permisos y si debe aplicarse O_TRUNC (dejar el archivo a 0 bytes)
+		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		perror("open_file: Error opening file");

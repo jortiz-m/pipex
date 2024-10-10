@@ -6,16 +6,13 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:05:57 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/08 12:06:01 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:11:13 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/* Función que recibe un archivo y un comando. Busca
-la ruta del cmd para poder ejecutarlo en el archivo con
-execve. */
-void	exec_cmd_to_file(char *cmd_arg)
+void	exec_cmd(char *cmd_arg)
 {
 	char	**splitted_paths;
 	char	**cmd_paths;
@@ -35,24 +32,4 @@ void	exec_cmd_to_file(char *cmd_arg)
 		perror("execve: error executing commands");
 		exit(EXIT_FAILURE);
 	}
-}
-
-/* Ejecuta el comando touch, le hemos pasado una macro de forma arbitraria
-para localizar touch */
-void	*exec_touch(const char *file)
-{
-	char	**touch_matrix;
-
-	touch_matrix = create_matrix(3);
-	if (!touch_matrix)
-		return (NULL);
-	touch_matrix[0] = "touch";
-	touch_matrix[1] = (char *)file;
-	if (execve(TOUCH_PATH, touch_matrix, NULL) == -1)
-	{
-		free_matrix(touch_matrix);
-		perror("exec_touch: Error creating a file");
-		exit(EXIT_FAILURE);
-	}
-	return (NULL);
 }

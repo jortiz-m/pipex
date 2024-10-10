@@ -6,14 +6,12 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:02:57 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/08 12:03:37 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:46:39 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/* Verifica si el comando recibido existe y es posible ejecutarlo.
-En caso de que exista y pueda ejecutarse devuelve True */
 bool	cmd_validation(char *cmd1, char *cmd2)
 {
 	char	**splitted_paths;
@@ -26,7 +24,7 @@ bool	cmd_validation(char *cmd1, char *cmd2)
 	splitted_paths = split_paths(LINUX_PATH);
 	cmd = ft_split(cmd1, ' ');
 	cmd1_path = concat_paths(splitted_paths, cmd[0]);
-	free(cmd);
+	free_matrix(cmd);
 	cmd = ft_split(cmd2, ' ');
 	cmd2_path = concat_paths(splitted_paths, cmd[0]);
 	if (path_validation(cmd1_path))
@@ -37,12 +35,10 @@ bool	cmd_validation(char *cmd1, char *cmd2)
 	free_matrix(splitted_paths);
 	free_matrix(cmd1_path);
 	free_matrix(cmd2_path);
-	free(cmd);
+	free_matrix(cmd);
 	return (res);
 }
 
-/* Spliteamos la macro definida en el .h que indica la variable
-de entorno PATH del sistema (LINUX) */
 char	**split_paths(char *envp)
 {
 	char	**splitted_paths;
@@ -56,7 +52,6 @@ char	**split_paths(char *envp)
 	return (splitted_paths);
 }
 
-/* Concatena cmd a cada str de la matriz */
 char	**concat_paths(char **splitted_paths, char *cmd)
 {
 	char	**full_path;
@@ -75,9 +70,6 @@ char	**concat_paths(char **splitted_paths, char *cmd)
 	return (full_path);
 }
 
-/* Concatena S1 con S2 usando reserva (dinámica) con malloc.
-nos aseguramos de que añada '/' antes de concatenar el comando recibido
-por parámetro */
 char	*cmdcat(char *s1, char *s2)
 {
 	char	*cmd_concat;
@@ -90,8 +82,6 @@ char	*cmdcat(char *s1, char *s2)
 	free(temp);
 	return (cmd_concat);
 }
-/* Validación de que exista y permita la ejecución del comando
-recibido */
 
 bool	path_validation(char **cmd_path)
 {

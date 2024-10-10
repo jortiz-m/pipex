@@ -6,32 +6,40 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:07:13 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/08 12:07:16 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:33:53 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_child(int fd, t_pipe pipe, char *cmd)
+void	child_process(char **av, t_pipe pipe, char *cmd, pid_t child)
 {
-	dup2(fd, STDIN_FILENO);
-	close(pipe.read_pipe);
-	if (dup2(pipe.write_pipe, STDOUT_FILENO) == -1)
+	int	fd;
+
+	if (child == -1)
 	{
-		perror("child dup2: Error duplicating file descriptors");
+		perror("fork: error at child process");
 		exit(EXIT_FAILURE);
 	}
-	exec_cmd_to_file(cmd);
+	else if (child == 0)
+	{
+		fd = open_file(av[0], READ);
+		dup2(pipe.write_pipe, STDOUT_FILENO);
+		dup2(fd, STDIN_FILENO);
+		close(pipe.read_pipe);
+		close(pipe.write_pipe);
+		exec_cmd(cmd);
+	}
 }
 
-void	ft_parent(int fd, t_pipe pipe, char *cmd)
+void	parent_process(char **av, t_pipe pipe, char *cmd)
 {
+	int	fd;
+
+	fd = open_file(av[3], WRITE);
+	dup2(pipe.read_pipe, STDIN_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	close(pipe.write_pipe);
-	if (dup2(pipe.read_pipe, STDIN_FILENO) == -1)
-	{
-		perror("parent dup2: Error duplicating file descriptors");
-		exit(EXIT_FAILURE);
-	}
-	exec_cmd_to_file(cmd);
+	close(pipe.read_pipe);
+	exec_cmd(cmd);
 }
