@@ -6,25 +6,22 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/10 12:32:59 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:30:51 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	validate_arguments(int ac, char **av)
+void	validate_arguments(int argc, char **argv)
 {
-	if (ac == 4)
+	if (argc == 4)
 	{
-		if (!fd_validation(av[0]) || !cmd_validation(av[1], av[2]))
-		{
-			perror("fd_or_cmd: No valid arguments");
+		if (!fd_validation(argv[0]) || !cmd_validation(argv[1], argv[2]))
 			exit(EXIT_FAILURE);
-		}
 	}
 	else
 	{
-		ft_putstr_fd("write in this format: ./pipex infile cmd1 cmd2 outfile\n", 2);
+		ft_putstr_fd("invalid format: ./pipex infile cmd1 cmd2 outfile\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -47,11 +44,11 @@ char	*get_path(char **cmd_paths)
 	return (NULL);
 }
 
-int	open_file(char *file, enum e_mode mode)
+int	open_file(char *file, int mode)
 {
 	int	fd;
 
-	if (mode == READ)
+	if (mode == 0)
 		fd = open(file, O_RDONLY);
 	else
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);

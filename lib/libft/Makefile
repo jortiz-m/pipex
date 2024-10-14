@@ -21,19 +21,20 @@ CFLAGS = -Wall -Werror -Wextra
 all:$(NAME)
 
 $(NAME):$(OBJECT)
-	ar rcs $(NAME) $(OBJECT)
+	@ar rcs $(NAME) $(OBJECT)
+	@echo libft compiled!
 
 bonus: $(OBJECT) $(BOBJECT)
-	ar rcs $(NAME) $(BOBJECT) $(OBJECT)
+	@ar rcs $(NAME) $(BOBJECT) $(OBJECT)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o
+	@rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

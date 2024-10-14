@@ -6,13 +6,13 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:07:13 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/10 12:33:53 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:21:15 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(char **av, t_pipe pipe, char *cmd, pid_t child)
+void	child_process(char **argv, int *pipe, char *cmd, pid_t child)
 {
 	int	fd;
 
@@ -23,23 +23,25 @@ void	child_process(char **av, t_pipe pipe, char *cmd, pid_t child)
 	}
 	else if (child == 0)
 	{
-		fd = open_file(av[0], READ);
-		dup2(pipe.write_pipe, STDOUT_FILENO);
+		fd = open_file(argv[0], 0);
 		dup2(fd, STDIN_FILENO);
-		close(pipe.read_pipe);
-		close(pipe.write_pipe);
+		close(fd);
+		dup2(pipe[1], STDOUT_FILENO);
+		close(pipe[0]);
+		close(pipe[1]);
 		exec_cmd(cmd);
 	}
 }
 
-void	parent_process(char **av, t_pipe pipe, char *cmd)
+void	parent_process(char **argv, int *pipe, char *cmd)
 {
 	int	fd;
 
-	fd = open_file(av[3], WRITE);
-	dup2(pipe.read_pipe, STDIN_FILENO);
+	fd = open_file(argv[3], 1);
+	dup2(pipe[0], STDIN_FILENO);
+	close(pipe[0]);
+	close(pipe[1]);
 	dup2(fd, STDOUT_FILENO);
-	close(pipe.write_pipe);
-	close(pipe.read_pipe);
+	close(fd);
 	exec_cmd(cmd);
 }

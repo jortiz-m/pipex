@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:55:32 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/10 12:34:19 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:39:08 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,27 @@
 
 # endif
 
-enum e_mode
-{
-	READ,
-	WRITE,
-};
-
-typedef struct s_pipe
-{
-	int	read_pipe;
-	int	write_pipe;
-}	t_pipe;
-
-/* CHECK_CMD */
-bool	cmd_validation(char *cmd1, char *cmd2);
 char	**split_paths(char *envp);
 char	**concat_paths(char **splitted_paths, char *cmd);
 char	*cmdcat(char *s1, char *s2);
 bool	path_validation(char **cmd_path);
+bool	cmd_validation(char *cmd1, char *cmd2);
 
-/* CHECK_FD */
 bool	fd_validation(const char *file1);
 
-/* EXEC */
 void	exec_cmd(char *cmd_arg);
 
-/* MATRIX UTILS*/
 char	**create_matrix(int n);
 void	free_matrix(char **matrix);
 int		ft_matrixlen(char **matrix);
 
-/* PIPES */
-t_pipe	create_pipe(void);
+int		*create_pipe(void);
 
-/* PIPEX UTILS 	*/
-void	validate_arguments(int ac, char **av);
+void	validate_arguments(int argc, char **argv);
 char	*get_path(char **cmd_paths);
-int		open_file(char *file, enum e_mode mode);
+int		open_file(char *file, int mode);
 
-/* PROCESS */
-void	child_process(char **av, t_pipe pipe, char *cmd, pid_t child);
-void	parent_process(char **av, t_pipe pipe, char *cmd);
+void	child_process(char **argv, int *pipe, char *cmd, pid_t child);
+void	parent_process(char **argv, int *pipe, char *cmd);
 
 #endif
