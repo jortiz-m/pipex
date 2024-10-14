@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:07:13 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/14 12:21:15 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:17:44 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	child_process(char **argv, int *pipe, char *cmd, pid_t child)
 {
+
 	int	fd;
 
 	if (child == -1)

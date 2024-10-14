@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:55:32 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/14 12:39:08 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:16:48 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	fd_validation(const char *file1);
 
 void	exec_cmd(char *cmd_arg);
 
-char	**create_matrix(int n);
 void	free_matrix(char **matrix);
 int		ft_matrixlen(char **matrix);
 
