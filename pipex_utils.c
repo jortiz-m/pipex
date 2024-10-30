@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/14 14:14:22 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:05:43 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	open_file(char *file, int mode)
 		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		perror("open_file: Error opening file");
+		perror("dup2: error duplicating fd");
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

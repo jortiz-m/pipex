@@ -6,7 +6,7 @@
 #    By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/04 12:55:25 by jortiz-m          #+#    #+#              #
-#    Updated: 2024/10/11 12:35:29 by jortiz-m         ###   ########.fr        #
+#    Updated: 2024/10/25 14:17:15 by jortiz-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ PIPEX_SRC	= pipex.c \
             check_fd.c \
             exec.c \
             matrix_utils.c \
-            create.c
+            create.c \
+			error.c
 
 
 PIPEX_OBJ = $(addprefix obj/, $(PIPEX_SRC:.c=.o))

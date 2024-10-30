@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:02:57 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/11 12:35:24 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:20:35 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ bool	cmd_validation(char *cmd1, char *cmd2)
 	free_matrix(cmd);
 	cmd = ft_split(cmd2, ' ');
 	cmd2_path = concat_paths(splitted_paths, cmd[0]);
-	if (path_validation(cmd1_path))
+	if (path_validation(cmd1_path, cmd1))
 	{
-		if (path_validation(cmd2_path))
+		if (path_validation(cmd2_path, cmd2))
 			res = true;
 	}
 	free_matrix(splitted_paths);
@@ -83,7 +83,7 @@ char	*cmdcat(char *s1, char *s2)
 	return (cmd_concat);
 }
 
-bool	path_validation(char **cmd_path)
+bool	path_validation(char **cmd_path, char *cmd)
 {
 	int	i;
 
@@ -94,5 +94,6 @@ bool	path_validation(char **cmd_path)
 			return (true);
 		i++;
 	}
+	error_cmd(cmd);
 	return (false);
 }

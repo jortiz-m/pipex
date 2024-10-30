@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:55:14 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/14 11:30:15 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:41:33 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	child = fork();
 	child_process(argv, pipe, argv[1], child);
 	parent_process(argv, pipe, argv[2]);
+	free(pipe);
 	exit(EXIT_SUCCESS);
 }

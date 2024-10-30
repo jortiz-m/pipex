@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:55:32 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/14 15:16:48 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:18:48 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@
 char	**split_paths(char *envp);
 char	**concat_paths(char **splitted_paths, char *cmd);
 char	*cmdcat(char *s1, char *s2);
-bool	path_validation(char **cmd_path);
+bool	path_validation(char **cmd_path, char *cmd);
 bool	cmd_validation(char *cmd1, char *cmd2);
 
 bool	fd_validation(const char *file1);
+void	error_fd(const char *file);
+void	error_cmd(char *cmd);
 
 void	exec_cmd(char *cmd_arg);
 
