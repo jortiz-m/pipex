@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:56 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/25 14:05:43 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:12:47 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	validate_arguments(int argc, char **argv)
 {
 	if (argc == 4)
 	{
-		if (!fd_validation(argv[0]) || !cmd_validation(argv[1], argv[2]))
+		if (!fd_valid(argv[0], argv[1]) || !cmd_valid(argv[1], argv[2]))
 			exit(EXIT_FAILURE);
 	}
 	else
 	{
-		ft_putstr_fd("invalid format: ./pipex infile cmd1 cmd2 outfile\n", 2);
+		ft_putendl_fd("invalid format: ./pipex infile cmd1 cmd2 outfile\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
 
-char	*get_path(char **cmd_paths)
+char	*get_path(char **cmd_paths, char *cmd)
 {
 	char	*cmd_dir;
 	int		i;
@@ -40,6 +40,10 @@ char	*get_path(char **cmd_paths)
 			return (cmd_dir);
 		}
 		i++;
+	}
+	if (access(cmd, F_OK | X_OK) == 0)
+	{
+		return (cmd);
 	}
 	return (NULL);
 }

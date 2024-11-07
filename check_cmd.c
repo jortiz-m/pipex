@@ -6,13 +6,13 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:02:57 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/25 14:20:35 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:28:35 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-bool	cmd_validation(char *cmd1, char *cmd2)
+bool	cmd_valid(char *cmd1, char *cmd2)
 {
 	char	**splitted_paths;
 	char	**cmd1_path;
@@ -76,7 +76,7 @@ char	*cmdcat(char *s1, char *s2)
 	char	*temp;
 
 	temp = ft_strjoin(s1, "/");
-	if (!temp)
+	if (!temp || !s2)
 		return (NULL);
 	cmd_concat = ft_strjoin(temp, s2);
 	free(temp);
@@ -85,7 +85,8 @@ char	*cmdcat(char *s1, char *s2)
 
 bool	path_validation(char **cmd_path, char *cmd)
 {
-	int	i;
+	int		i;
+	char	**cmd_matrix;
 
 	i = 0;
 	while (cmd_path[i])
@@ -94,6 +95,13 @@ bool	path_validation(char **cmd_path, char *cmd)
 			return (true);
 		i++;
 	}
+	cmd_matrix = ft_split(cmd, ' ');
+	if (access(cmd_matrix[0], F_OK | X_OK) == 0)
+	{
+		free_matrix(cmd_matrix);
+		return (true);
+	}
+	free_matrix(cmd_matrix);
 	error_cmd(cmd);
 	return (false);
 }

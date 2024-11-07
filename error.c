@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:11:40 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/25 14:12:02 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:27:53 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ void	error_fd(const char *file)
 	ft_putstr_fd(error_msg, 2);
 	free(test);
 	free(error_msg);
+}
+
+void	error_per(const char *fd, char *cmd_name)
+{
+	char	*error_msg;
+	char	*placeholder;
+
+	placeholder = ft_strjoin(cmd_name, ": ");
+	error_msg = ft_strjoin(placeholder, fd);
+	free(placeholder);
+	placeholder = ft_strjoin(error_msg, ": Permission denied\n");
+	free(error_msg);
+	ft_putstr_fd(placeholder, 2);
+	free(placeholder);
 }

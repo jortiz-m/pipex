@@ -6,7 +6,7 @@
 /*   By: jortiz-m <jortiz-m@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:07:13 by jortiz-m          #+#    #+#             */
-/*   Updated: 2024/10/25 13:52:04 by jortiz-m         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:24:57 by jortiz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	child_process(char **argv, int *pipe, char *cmd, pid_t child)
 {
-
 	int	fd;
 
 	if (child == -1)
@@ -37,7 +36,7 @@ void	child_process(char **argv, int *pipe, char *cmd, pid_t child)
 void	parent_process(char **argv, int *pipe, char *cmd)
 {
 	int	fd;
-	int child;
+	int	child;
 
 	child = fork();
 	if (child == 0)
